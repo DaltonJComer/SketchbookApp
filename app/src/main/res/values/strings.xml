@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SketchbookApp</string>
+    <string-array name="menu_options">
+        <item>Change Menu</item>
+        <item>Home</item>
+        <item>Events</item>
+        <item>Releases</item>
+        <item>My Watchlist</item>
+        <item>Contact Info</item>
+    </string-array>
+</resources>
