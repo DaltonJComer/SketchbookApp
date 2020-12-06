@@ -44,6 +44,9 @@ public class Events extends AppCompatActivity {
                             intent = new Intent(getBaseContext(),Releases.class);
                             startActivity(intent);
                             break;
+                        case "Request Comics":
+                            intent = new Intent(getBaseContext(), RequestForm.class);
+                            startActivity(intent);
                     }
                 }
             }

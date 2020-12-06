@@ -42,6 +42,9 @@ public class Contact extends AppCompatActivity {
                             intent = new Intent(getBaseContext(),Events.class);
                             startActivity(intent);
                             break;
+                        case "Request Comics":
+                            intent = new Intent(getBaseContext(), RequestForm.class);
+                            startActivity(intent);
                     }
 
                 }
