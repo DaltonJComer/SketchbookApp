@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RequestForm"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="50dip"
+        android:popupBackground="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        android:theme="@style/spinnerTheme"
+        android:id="@+id/menu"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:id="@+id/mainLayout">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FULL NAME:"
+                android:textAlignment="center"
+                android:textSize="15dip"
+                android:layout_margin="20dip"
+                android:id="@+id/name"
+                android:textColor="@color/colorAccent" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:hint="ENTER FULL NAME"
+                android:id="@+id/enterName"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EMAIL:"
+                android:textAlignment="center"
+                android:textSize="15dip"
+                android:layout_margin="20dip"
+                android:id="@+id/email"
+                android:textColor="@color/colorAccent"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:hint="ENTER EMAIL ADDRESS"
+                android:id="@+id/enterEmail"
+                android:textAlignment="center"/>
+<!--            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:id="@+id/comicSpinner"
+                android:textAlignment="center"/>-->
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REQUESTS:"
+        android:textAlignment="center"
+        android:textSize="15dip"
+        android:layout_margin="20dip"
+        android:id="@+id/requests"
+        android:textColor="@color/colorAccent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/comicsScroll">
+
+    </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="CLEAR REQUESTED COMICS"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            android:layout_margin="40dip"
+            android:padding="10dip"
+            android:id="@+id/clearRequests"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="SEND REQUEST"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            android:layout_margin="40dip"
+            android:padding="10dip"
+            android:id="@+id/sendRequest"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
