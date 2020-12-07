@@ -26,10 +26,10 @@ import android.widget.Toast;
 import java.net.Authenticator;
 import java.util.*;
 import java.util.Properties;
-
+/*
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
+import javax.mail.Session;*/
 
 
 
