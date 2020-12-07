@@ -1,0 +1,160 @@
+Index: app/src/main/java/com/example/sketchbookapp/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sketchbookapp;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        Spinner menu = findViewById(R.id.menu);\r\n        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        menu.setAdapter(adapter);\r\n        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                if(parent.getItemAtPosition(position).toString()!=\"Change Menu\"){\r\n                    Intent intent;\r\n                    switch (parent.getItemAtPosition(position).toString()){\r\n                        case \"Releases\":\r\n                            intent = new Intent(getBaseContext(),Releases.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"My Watchlist\":\r\n                            intent = new Intent(getBaseContext(),Watchlist.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Contact Info\":\r\n                            intent = new Intent(getBaseContext(),Contact.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Events\":\r\n                            intent = new Intent(getBaseContext(),Events.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Request Comics\":\r\n                            intent = new Intent(getBaseContext(), RequestForm.class);\r\n                            startActivity(intent);\r\n                        default:\r\n                            Toast.makeText(getBaseContext(),\"ERROR\",Toast.LENGTH_SHORT);\r\n                    }\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/sketchbookapp/MainActivity.java	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/java/com/example/sketchbookapp/MainActivity.java	(date 1607222844097)
+@@ -17,46 +17,46 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+ 
+-        Spinner menu = findViewById(R.id.menu);
+-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
+-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-        menu.setAdapter(adapter);
+-        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+-            @Override
+-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+-                if(parent.getItemAtPosition(position).toString()!="Change Menu"){
+-                    Intent intent;
+-                    switch (parent.getItemAtPosition(position).toString()){
+-                        case "Releases":
+-                            intent = new Intent(getBaseContext(),Releases.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "My Watchlist":
+-                            intent = new Intent(getBaseContext(),Watchlist.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "Contact Info":
+-                            intent = new Intent(getBaseContext(),Contact.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "Events":
+-                            intent = new Intent(getBaseContext(),Events.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "Request Comics":
+-                            intent = new Intent(getBaseContext(), RequestForm.class);
+-                            startActivity(intent);
+-                        default:
+-                            Toast.makeText(getBaseContext(),"ERROR",Toast.LENGTH_SHORT);
+-                    }
+-                }
+-            }
+-
+-            @Override
+-            public void onNothingSelected(AdapterView<?> parent) {
+-
+-            }
+-        });
++//        Spinner menu = findViewById(R.id.menu);
++//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
++//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++//        menu.setAdapter(adapter);
++//        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
++//            @Override
++//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
++//                if(parent.getItemAtPosition(position).toString()!="Change Menu"){
++//                    Intent intent;
++//                    switch (parent.getItemAtPosition(position).toString()){
++//                        case "Releases":
++//                            intent = new Intent(getBaseContext(),Releases.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "My Watchlist":
++//                            intent = new Intent(getBaseContext(),Watchlist.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "Contact Info":
++//                            intent = new Intent(getBaseContext(),Contact.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "Events":
++//                            intent = new Intent(getBaseContext(),Events.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "Request Comics":
++//                            intent = new Intent(getBaseContext(), RequestForm.class);
++//                            startActivity(intent);
++//                        default:
++//                            Toast.makeText(getBaseContext(),"ERROR",Toast.LENGTH_SHORT);
++//                    }
++//                }
++//            }
++//
++//            @Override
++//            public void onNothingSelected(AdapterView<?> parent) {
++//
++//            }
++//        });
+     }
+ 
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" default=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ .idea/misc.xml	(date 1607214913285)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.example.sketchbookapp\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <activity android:name=\".RequestForm\"></activity>\r\n        <activity android:name=\".Contact\" />\r\n        <activity android:name=\".Watchlist\" />\r\n        <activity android:name=\".Events\" />\r\n        <activity android:name=\".Releases\" />\r\n        <activity android:name=\".MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/AndroidManifest.xml	(date 1607218332942)
+@@ -2,7 +2,14 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="com.example.sketchbookapp">
+ 
++    <!--
++         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
++         Google Maps Android API v2, but you must specify either coarse or fine
++         location permissions for the "MyLocation" functionality.
++    -->
++    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+ 
+     <application
+         android:allowBackup="true"
+@@ -11,7 +18,20 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+-        <activity android:name=".RequestForm"></activity>
++
++        <!--
++             The API key for Google Maps-based APIs is defined as a string resource.
++             (See the file "res/values/google_maps_api.xml").
++             Note that the API key is linked to the encryption key used to sign the APK.
++             You need a different API key for each encryption key, including the release key that is used to
++             sign the APK for publishing.
++             You can define the keys for the debug and release targets in src/debug/ and src/release/.
++        -->
++        <meta-data
++            android:name="com.google.android.geo.API_KEY"
++            android:value="@string/google_maps_key" />
++
++        <activity android:name=".RequestForm" />
+         <activity android:name=".Contact" />
+         <activity android:name=".Watchlist" />
+         <activity android:name=".Events" />
