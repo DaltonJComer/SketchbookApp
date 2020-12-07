@@ -34,6 +34,7 @@
         <activity android:name=".Watchlist" />
         <activity android:name=".Events" />
         <activity android:name=".Releases" />
+        <activity android:name=".RequestForm"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
