@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent(getBaseContext(),Events.class);
                             startActivity(intent);
                             break;
+                        case "Request Comics":
+                            intent = new Intent(getBaseContext(), RequestForm.class);
+                            startActivity(intent);
                         default:
                             Toast.makeText(getBaseContext(),"ERROR",Toast.LENGTH_SHORT);
                     }

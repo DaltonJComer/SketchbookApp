@@ -61,5 +61,10 @@
             android:textColor="@color/colorAccent"
             android:textAlignment="center"/>
     </LinearLayout>
-
+<fragment
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="com.example.sketchbookapp.MapsFragment"
+    android:id="@+id/map"
+    />
 </LinearLayout>
