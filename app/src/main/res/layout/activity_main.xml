@@ -30,4 +30,10 @@
         android:src="@drawable/home_image"
         android:layout_gravity="center"
         />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.sketchbookapp.MapsFragment"
+        android:id="@+id/map"
+        />
 </LinearLayout>
