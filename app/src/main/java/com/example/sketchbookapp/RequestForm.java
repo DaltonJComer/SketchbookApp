@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.se.omapi.Session;
+//import android.se.omapi.Session;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,14 +23,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.Authenticator;
 import java.util.*;
 import java.util.Properties;
 
+//import javax.mail.Authenticator;
 import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 public class RequestForm extends AppCompatActivity {
@@ -174,17 +178,11 @@ public class RequestForm extends AppCompatActivity {
                 builder.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        prop.put("mail.smtp.auth",true);
-                        prop.put("mail.smtp.starttls.enable","true");
-                        prop.put("mail.smtp.host","smtp.gmail.com");
-                        prop.put("mail.smtp.port","587");
-
-                        String myAcc = "sketchbookPullRequests@gmail.com";
-                        String pass = "Sketchbook7275!";
-
-                        //Session session = Session.getInstance(prop,new Authenticator(){
-
-                        //});
+                        try {
+                            JavaMailUtil.sendMail();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -200,4 +198,5 @@ public class RequestForm extends AppCompatActivity {
             }
         });
     }
+
 }
