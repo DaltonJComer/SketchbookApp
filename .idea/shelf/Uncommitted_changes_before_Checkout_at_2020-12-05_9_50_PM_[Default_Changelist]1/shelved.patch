@@ -1,0 +1,574 @@
+Index: app/src/main/java/com/example/sketchbookapp/Contact.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sketchbookapp;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Spinner;\r\n\r\npublic class Contact extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_contact);\r\n\r\n        Spinner menu = findViewById(R.id.menu);\r\n        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        menu.setAdapter(adapter);\r\n        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                if(parent.getItemAtPosition(position).toString()!=\"Change Menu\"){\r\n                    Intent intent;\r\n                    switch (parent.getItemAtPosition(position).toString()){\r\n                        case \"Home\":\r\n                            intent = new Intent(getBaseContext(),MainActivity.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"My Watchlist\":\r\n                            intent = new Intent(getBaseContext(),Watchlist.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Releases\":\r\n                            intent = new Intent(getBaseContext(),Releases.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Events\":\r\n                            intent = new Intent(getBaseContext(),Events.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Request Comics\":\r\n                            intent = new Intent(getBaseContext(), RequestForm.class);\r\n                            startActivity(intent);\r\n                    }\r\n\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/sketchbookapp/Contact.java	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/java/com/example/sketchbookapp/Contact.java	(date 1607218491679)
+@@ -9,6 +9,13 @@
+ import android.widget.ArrayAdapter;
+ import android.widget.Spinner;
+ 
++import com.google.android.gms.maps.CameraUpdateFactory;
++import com.google.android.gms.maps.GoogleMap;
++import com.google.android.gms.maps.OnMapReadyCallback;
++import com.google.android.gms.maps.SupportMapFragment;
++import com.google.android.gms.maps.model.LatLng;
++import com.google.android.gms.maps.model.MarkerOptions;
++
+ public class Contact extends AppCompatActivity {
+ 
+     @Override
+@@ -56,4 +63,5 @@
+             }
+         });
+     }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/sketchbookapp/RequestForm.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.sketchbookapp;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.widget.NestedScrollView;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.database.Cursor;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.RelativeLayout;\r\nimport android.widget.ScrollView;\r\nimport android.widget.Spinner;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\npublic class RequestForm extends AppCompatActivity {\r\n\r\n    DBHelper db = new DBHelper(this);\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        System.out.println(\"ENTERED REQUEST\");\r\n\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_request_form);\r\n\r\n        Spinner menu = findViewById(R.id.menu);\r\n        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        menu.setAdapter(adapter);\r\n        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                if(parent.getItemAtPosition(position).toString()!=\"Change Menu\"){\r\n                    Intent intent;\r\n                    switch (parent.getItemAtPosition(position).toString()){\r\n                        case \"Releases\":\r\n                            intent = new Intent(getBaseContext(),Releases.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"My Watchlist\":\r\n                            intent = new Intent(getBaseContext(),Watchlist.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Contact Info\":\r\n                            intent = new Intent(getBaseContext(),Contact.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        case \"Events\":\r\n                            intent = new Intent(getBaseContext(),Events.class);\r\n                            startActivity(intent);\r\n                            break;\r\n                        default:\r\n                            Toast.makeText(getBaseContext(),\"ERROR\",Toast.LENGTH_SHORT);\r\n                    }\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n\r\n            }\r\n        });\r\n\r\n        LinearLayout layout = findViewById(R.id.comicsScroll);\r\n\r\n/*        Spinner comics = findViewById(R.id.comicSpinner);\r\n        ArrayAdapter<String> spinAdapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Releases.listItems);\r\n        comics.setAdapter(spinAdapt);*/\r\n\r\n        LinearLayout rg = new LinearLayout(this);\r\n        RadioButton rb;\r\n        int id = 0;\r\n\r\n        Cursor cursor = db.getComics();\r\n        cursor.moveToFirst();\r\n        while(!cursor.isAfterLast()){\r\n            rb = new RadioButton(this);\r\n            rb.setText(cursor.getString(1)+\" (\"+cursor.getString(2)+\")\");\r\n            rb.setId(id);\r\n            rb.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    RadioButton currentButton = view.findViewById(view.getId());\r\n                }\r\n            });\r\n            id++;\r\n            rg.addView(rb);\r\n            cursor.moveToNext();\r\n        }\r\n\r\n/*        for (String s:Releases.listItems) {\r\n            rb = new RadioButton(this);\r\n            rb.setText(s);\r\n            rb.setId(id);\r\n            rb.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    RadioButton currentButton = view.findViewById(view.getId());\r\n                }\r\n            });\r\n            id++;\r\n            rg.addView(rb);\r\n        }*/\r\n\r\n        final int numRadButtons = id;\r\n\r\n        rg.setOrientation(RadioGroup.VERTICAL);\r\n        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) RelativeLayout.LayoutParams.WRAP_CONTENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);\r\n        //params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);\r\n        params.leftMargin =150;\r\n        params.topMargin = 100;\r\n\r\n\r\n        rg.setLayoutParams(params);\r\n        rg.setTag(\"ComicList\");\r\n\r\n        layout.addView(rg);\r\n\r\n        Button clearRequests = findViewById(R.id.clearRequests);\r\n        clearRequests.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                for(int i=0;i<numRadButtons;i++){\r\n                    RadioButton currButton = findViewById(i);\r\n                    if(currButton.isChecked()){\r\n                        currButton.setChecked(false);\r\n                    }\r\n                }\r\n            }\r\n        });\r\n\r\n        Button sendRequest = findViewById(R.id.sendRequest);\r\n        sendRequest.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                String requests = \"\";\r\n                for(int i=0;i<numRadButtons;i++){\r\n                    RadioButton currButton = findViewById(i);\r\n                    if(currButton.isChecked()){\r\n                        requests = requests+currButton.getText()+\"\\n\";\r\n                    }\r\n                }\r\n                EditText insert = findViewById(R.id.enterName);\r\n                String name = insert.getText().toString();\r\n                insert = findViewById(R.id.enterEmail);\r\n                String email = insert.getText().toString();\r\n\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);\r\n\r\n                builder.setTitle(\"Send Request?\");\r\n\r\n                builder.setMessage(\"Name: \"+name+\"\\n\\nEmail: \"+email+\"\\n\\nRequest:\\n\"+requests);\r\n                builder.setPositiveButton(\"Send Request\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n\r\n                    }\r\n                });\r\n                builder.setNegativeButton(\"Cancel\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n\r\n                    }\r\n                });\r\n\r\n                AlertDialog dialog = builder.create();\r\n                dialog.show();\r\n\r\n            }\r\n        });\r\n    }\r\n}
+===================================================================
+--- app/src/main/java/com/example/sketchbookapp/RequestForm.java	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/java/com/example/sketchbookapp/RequestForm.java	(date 1607215043440)
+@@ -28,155 +28,155 @@
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+-        System.out.println("ENTERED REQUEST");
+-
++//        System.out.println("ENTERED REQUEST");
++//
+         super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_request_form);
+-
+-        Spinner menu = findViewById(R.id.menu);
+-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
+-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+-        menu.setAdapter(adapter);
+-        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+-            @Override
+-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+-                if(parent.getItemAtPosition(position).toString()!="Change Menu"){
+-                    Intent intent;
+-                    switch (parent.getItemAtPosition(position).toString()){
+-                        case "Releases":
+-                            intent = new Intent(getBaseContext(),Releases.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "My Watchlist":
+-                            intent = new Intent(getBaseContext(),Watchlist.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "Contact Info":
+-                            intent = new Intent(getBaseContext(),Contact.class);
+-                            startActivity(intent);
+-                            break;
+-                        case "Events":
+-                            intent = new Intent(getBaseContext(),Events.class);
+-                            startActivity(intent);
+-                            break;
+-                        default:
+-                            Toast.makeText(getBaseContext(),"ERROR",Toast.LENGTH_SHORT);
+-                    }
+-                }
+-            }
+-
+-            @Override
+-            public void onNothingSelected(AdapterView<?> parent) {
+-
+-            }
+-        });
+-
+-        LinearLayout layout = findViewById(R.id.comicsScroll);
+-
+-/*        Spinner comics = findViewById(R.id.comicSpinner);
+-        ArrayAdapter<String> spinAdapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Releases.listItems);
+-        comics.setAdapter(spinAdapt);*/
+-
+-        LinearLayout rg = new LinearLayout(this);
+-        RadioButton rb;
+-        int id = 0;
+-
+-        Cursor cursor = db.getComics();
+-        cursor.moveToFirst();
+-        while(!cursor.isAfterLast()){
+-            rb = new RadioButton(this);
+-            rb.setText(cursor.getString(1)+" ("+cursor.getString(2)+")");
+-            rb.setId(id);
+-            rb.setOnClickListener(new View.OnClickListener() {
+-                @Override
+-                public void onClick(View view) {
+-                    RadioButton currentButton = view.findViewById(view.getId());
+-                }
+-            });
+-            id++;
+-            rg.addView(rb);
+-            cursor.moveToNext();
+-        }
+-
+-/*        for (String s:Releases.listItems) {
+-            rb = new RadioButton(this);
+-            rb.setText(s);
+-            rb.setId(id);
+-            rb.setOnClickListener(new View.OnClickListener() {
+-                @Override
+-                public void onClick(View view) {
+-                    RadioButton currentButton = view.findViewById(view.getId());
+-                }
+-            });
+-            id++;
+-            rg.addView(rb);
+-        }*/
+-
+-        final int numRadButtons = id;
+-
+-        rg.setOrientation(RadioGroup.VERTICAL);
+-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) RelativeLayout.LayoutParams.WRAP_CONTENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);
+-        //params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+-        params.leftMargin =150;
+-        params.topMargin = 100;
+-
+-
+-        rg.setLayoutParams(params);
+-        rg.setTag("ComicList");
+-
+-        layout.addView(rg);
+-
+-        Button clearRequests = findViewById(R.id.clearRequests);
+-        clearRequests.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                for(int i=0;i<numRadButtons;i++){
+-                    RadioButton currButton = findViewById(i);
+-                    if(currButton.isChecked()){
+-                        currButton.setChecked(false);
+-                    }
+-                }
+-            }
+-        });
+-
+-        Button sendRequest = findViewById(R.id.sendRequest);
+-        sendRequest.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                String requests = "";
+-                for(int i=0;i<numRadButtons;i++){
+-                    RadioButton currButton = findViewById(i);
+-                    if(currButton.isChecked()){
+-                        requests = requests+currButton.getText()+"\n";
+-                    }
+-                }
+-                EditText insert = findViewById(R.id.enterName);
+-                String name = insert.getText().toString();
+-                insert = findViewById(R.id.enterEmail);
+-                String email = insert.getText().toString();
+-
+-                AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);
+-
+-                builder.setTitle("Send Request?");
+-
+-                builder.setMessage("Name: "+name+"\n\nEmail: "+email+"\n\nRequest:\n"+requests);
+-                builder.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-
+-                    }
+-                });
+-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
++        setContentView(R.layout.activity_contact);
++//
++//        Spinner menu = findViewById(R.id.menu);
++//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
++//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++//        menu.setAdapter(adapter);
++//        menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
++//            @Override
++//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
++//                if(parent.getItemAtPosition(position).toString()!="Change Menu"){
++//                    Intent intent;
++//                    switch (parent.getItemAtPosition(position).toString()){
++//                        case "Releases":
++//                            intent = new Intent(getBaseContext(),Releases.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "My Watchlist":
++//                            intent = new Intent(getBaseContext(),Watchlist.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "Contact Info":
++//                            intent = new Intent(getBaseContext(),Contact.class);
++//                            startActivity(intent);
++//                            break;
++//                        case "Events":
++//                            intent = new Intent(getBaseContext(),Events.class);
++//                            startActivity(intent);
++//                            break;
++//                        default:
++//                            Toast.makeText(getBaseContext(),"ERROR",Toast.LENGTH_SHORT);
++//                    }
++//                }
++            }
++//
++//            @Override
++//            public void onNothingSelected(AdapterView<?> parent) {
++//
++//            }
++//        });
+ 
+-                    }
+-                });
+-
+-                AlertDialog dialog = builder.create();
+-                dialog.show();
+-
+-            }
+-        });
+-    }
++//        LinearLayout layout = findViewById(R.id.comicsScroll);
++//
++///*        Spinner comics = findViewById(R.id.comicSpinner);
++//        ArrayAdapter<String> spinAdapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Releases.listItems);
++//        comics.setAdapter(spinAdapt);*/
++//
++//        LinearLayout rg = new LinearLayout(this);
++//        RadioButton rb;
++//        int id = 0;
++//
++//        Cursor cursor = db.getComics();
++//        cursor.moveToFirst();
++//        while(!cursor.isAfterLast()){
++//            rb = new RadioButton(this);
++//            rb.setText(cursor.getString(1)+" ("+cursor.getString(2)+")");
++//            rb.setId(id);
++//            rb.setOnClickListener(new View.OnClickListener() {
++//                @Override
++//                public void onClick(View view) {
++//                    RadioButton currentButton = view.findViewById(view.getId());
++//                }
++//            });
++//            id++;
++//            rg.addView(rb);
++//            cursor.moveToNext();
++//        }
++//
++///*        for (String s:Releases.listItems) {
++//            rb = new RadioButton(this);
++//            rb.setText(s);
++//            rb.setId(id);
++//            rb.setOnClickListener(new View.OnClickListener() {
++//                @Override
++//                public void onClick(View view) {
++//                    RadioButton currentButton = view.findViewById(view.getId());
++//                }
++//            });
++//            id++;
++//            rg.addView(rb);
++//        }*/
++//
++//        final int numRadButtons = id;
++//
++//        rg.setOrientation(RadioGroup.VERTICAL);
++//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) RelativeLayout.LayoutParams.WRAP_CONTENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);
++//        //params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
++//        params.leftMargin =150;
++//        params.topMargin = 100;
++//
++//
++//        rg.setLayoutParams(params);
++//        rg.setTag("ComicList");
++//
++//        layout.addView(rg);
++//
++//        Button clearRequests = findViewById(R.id.clearRequests);
++//        clearRequests.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//                for(int i=0;i<numRadButtons;i++){
++//                    RadioButton currButton = findViewById(i);
++//                    if(currButton.isChecked()){
++//                        currButton.setChecked(false);
++//                    }
++//                }
++//            }
++//        });
++//
++//        Button sendRequest = findViewById(R.id.sendRequest);
++//        sendRequest.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//                String requests = "";
++//                for(int i=0;i<numRadButtons;i++){
++//                    RadioButton currButton = findViewById(i);
++//                    if(currButton.isChecked()){
++//                        requests = requests+currButton.getText()+"\n";
++//                    }
++//                }
++//                EditText insert = findViewById(R.id.enterName);
++//                String name = insert.getText().toString();
++//                insert = findViewById(R.id.enterEmail);
++//                String email = insert.getText().toString();
++//
++//                AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);
++//
++//                builder.setTitle("Send Request?");
++//
++//                builder.setMessage("Name: "+name+"\n\nEmail: "+email+"\n\nRequest:\n"+requests);
++//                builder.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
++//                    @Override
++//                    public void onClick(DialogInterface dialog, int which) {
++//
++//                    }
++//                });
++//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
++//                    @Override
++//                    public void onClick(DialogInterface dialog, int which) {
++//
++//                    }
++//                });
++//
++//                AlertDialog dialog = builder.create();
++//                dialog.show();
++//
++//            }
++//        });
++//    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_contact.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:background=\"@color/colorPrimary\"\r\n    tools:context=\".MainActivity\">\r\n    <Spinner\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/colorPrimaryDark\"\r\n        android:minHeight=\"50dip\"\r\n        android:popupBackground=\"@color/colorPrimaryDark\"\r\n        android:textAlignment=\"center\"\r\n        android:theme=\"@style/spinnerTheme\"\r\n        android:id=\"@+id/menu\"\r\n        />\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"25dip\"\r\n        android:textAlignment=\"center\"\r\n        android:textColor=\"@color/colorAccent\"\r\n        android:text=\"CONTACT INFO\"/>\r\n    <Space\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"20dip\"/>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_gravity=\"center\">\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Phone number:\\n(905) 682-0111\"\r\n            android:textSize=\"20dip\"\r\n            android:textColor=\"@color/colorAccent\"\r\n            android:textAlignment=\"center\"/>\r\n        <Space\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"20dip\"/>\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Website:\\nhttps://www.sketchbookcomics.ca/\"\r\n            android:textColor=\"@color/colorAccent\"\r\n            android:textSize=\"20dip\"\r\n            android:textAlignment=\"center\"/>\r\n        <Space\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"20dip\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Email:\\n store@sketchbookcomics.ca\"\r\n            android:textSize=\"20dip\"\r\n            android:textColor=\"@color/colorAccent\"\r\n            android:textAlignment=\"center\"/>\r\n    </LinearLayout>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_contact.xml	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/res/layout/activity_contact.xml	(date 1607222733014)
+@@ -28,6 +28,8 @@
+         android:layout_width="wrap_content"
+         android:layout_height="20dip"/>
+ 
++<!--    android:name="com.google.android.gms.maps.SupportMapFragment"-->
++    />
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:background=\"@color/colorPrimary\"\r\n    tools:context=\".MainActivity\">\r\n    <Spinner\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/colorPrimaryDark\"\r\n        android:minHeight=\"50dip\"\r\n        android:popupBackground=\"@color/colorPrimaryDark\"\r\n        android:textAlignment=\"center\"\r\n        android:theme=\"@style/spinnerTheme\"\r\n        android:id=\"@+id/menu\"\r\n        />\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"25dip\"\r\n        android:textAlignment=\"center\"\r\n        android:text=\"HOME\"\r\n        android:textColor=\"@color/colorAccent\"/>\r\n    <ImageView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:src=\"@drawable/home_image\"\r\n        android:layout_gravity=\"center\"\r\n        />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/src/main/res/layout/activity_main.xml	(date 1607222967966)
+@@ -30,4 +30,10 @@
+         android:src="@drawable/home_image"
+         android:layout_gravity="center"
+         />
++    <fragment
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:name="com.example.sketchbookapp.MapsFragment"
++        android:id="@+id/map"
++        />
+ </LinearLayout>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1607214899260)
++++ .idea/vcs.xml	(date 1607214899260)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1607214899195)
++++ .idea/compiler.xml	(date 1607214899195)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_maps.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_maps.xml	(date 1607218333003)
++++ app/src/main/res/layout/fragment_maps.xml	(date 1607218333003)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="utf-8"?>
++<fragment xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/map"
++    android:name="com.google.android.gms.maps.SupportMapFragment"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".MapsFragment" />
+\ No newline at end of file
+Index: app/src/main/java/com/example/sketchbookapp/MapsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/sketchbookapp/MapsFragment.java	(date 1607218491666)
++++ app/src/main/java/com/example/sketchbookapp/MapsFragment.java	(date 1607218491666)
+@@ -0,0 +1,57 @@
++package com.example.sketchbookapp;
++
++import androidx.annotation.NonNull;
++import androidx.annotation.Nullable;
++import androidx.fragment.app.Fragment;
++
++import android.os.Bundle;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++
++import com.google.android.gms.maps.CameraUpdateFactory;
++import com.google.android.gms.maps.GoogleMap;
++import com.google.android.gms.maps.OnMapReadyCallback;
++import com.google.android.gms.maps.SupportMapFragment;
++import com.google.android.gms.maps.model.LatLng;
++import com.google.android.gms.maps.model.MarkerOptions;
++
++public class MapsFragment extends Fragment {
++
++    private OnMapReadyCallback callback = new OnMapReadyCallback() {
++
++        /**
++         * Manipulates the map once available.
++         * This callback is triggered when the map is ready to be used.
++         * This is where we can add markers or lines, add listeners or move the camera.
++         * In this case, we just add a marker near Sydney, Australia.
++         * If Google Play services is not installed on the device, the user will be prompted to
++         * install it inside the SupportMapFragment. This method will only be triggered once the
++         * user has installed Google Play services and returned to the app.
++         */
++        @Override
++        public void onMapReady(GoogleMap googleMap) {
++            LatLng SketchBook = new LatLng(43.141911668925516, -79.24017739567529);
++            googleMap.addMarker(new MarkerOptions().position(SketchBook).title("SketchBook Comics"));
++            googleMap.moveCamera(CameraUpdateFactory.newLatLng(SketchBook));
++        }
++    };
++
++    @Nullable
++    @Override
++    public View onCreateView(@NonNull LayoutInflater inflater,
++                             @Nullable ViewGroup container,
++                             @Nullable Bundle savedInstanceState) {
++        return inflater.inflate(R.layout.fragment_maps, container, false);
++    }
++
++    @Override
++    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
++        super.onViewCreated(view, savedInstanceState);
++        SupportMapFragment mapFragment =
++                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
++        if (mapFragment != null) {
++            mapFragment.getMapAsync(callback);
++        }
++    }
++}
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.sketchbookapp\"\r\n        minSdkVersion 23\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 7145c5e5e6cbcaf96db9429ebb5edaac4e76275a)
++++ app/build.gradle	(date 1607215895019)
+@@ -29,5 +29,5 @@
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-
++    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+ }
+\ No newline at end of file
+Index: app/src/debug/res/values/google_maps_api.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/debug/res/values/google_maps_api.xml	(date 1607218491672)
++++ app/src/debug/res/values/google_maps_api.xml	(date 1607218491672)
+@@ -0,0 +1,24 @@
++<resources>
++    <!--
++    TODO: Before you run your application, you need a Google Maps API key.
++
++    To get one, follow this link, follow the directions and press "Create" at the end:
++
++    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=84:0C:86:BB:C5:BD:0C:42:A4:B0:E9:C4:C5:7A:9B:B0:70:D3:1E:D6%3Bcom.example.sketchbookapp
++
++    You can also add your credentials to an existing key, using these values:
++
++    Package name:
++    com.example.sketchbookapp
++
++    SHA-1 certificate fingerprint:
++    84:0C:86:BB:C5:BD:0C:42:A4:B0:E9:C4:C5:7A:9B:B0:70:D3:1E:D6
++
++    Alternatively, follow the directions here:
++    https://developers.google.com/maps/documentation/android/start#get-key
++
++    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
++    string in this file.
++    -->
++    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAbVnx_uVbTWpDNV8SLtiF0VRcf2gqzu2s</string>
++</resources>
+\ No newline at end of file
+Index: app/src/release/res/values/google_maps_api.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/release/res/values/google_maps_api.xml	(date 1607218333096)
++++ app/src/release/res/values/google_maps_api.xml	(date 1607218333096)
+@@ -0,0 +1,20 @@
++<resources>
++    <!--
++    TODO: Before you release your application, you need a Google Maps API key.
++
++    To do this, you can either add your release key credentials to your existing
++    key, or create a new key.
++
++    Note that this file specifies the API key for the release build target.
++    If you have previously set up a key for the debug target with the debug signing certificate,
++    you will also need to set up a key for your release certificate.
++
++    Follow the directions here:
++
++    https://developers.google.com/maps/documentation/android/signup
++
++    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
++    string in this file.
++    -->
++    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
++</resources>
+\ No newline at end of file
