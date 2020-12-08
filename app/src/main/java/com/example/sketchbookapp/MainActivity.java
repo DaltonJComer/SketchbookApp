@@ -1,8 +1,10 @@
 package com.example.sketchbookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,10 +54,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
+
+            Uri uri = Uri.parse("http://instagram.com/sketchbookcomicsandgames/");
+
+
         });
     }
 

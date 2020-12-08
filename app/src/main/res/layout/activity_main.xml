@@ -30,4 +30,11 @@
         android:src="@drawable/home_image"
         android:layout_gravity="center"
         />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webpage"
+        android:name="com.example.sketchbookapp.instaPage"
+        android:layout_margin="30dp"
+        />
 </LinearLayout>

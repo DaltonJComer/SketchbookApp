@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 //import android.se.omapi.Session;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -166,22 +167,38 @@ public class RequestForm extends AppCompatActivity {
                     }
                 }
                 EditText insert = findViewById(R.id.enterName);
+                EditText chosenComics = findViewById(R.id.enterComic);
                 String name = insert.getText().toString();
                 insert = findViewById(R.id.enterEmail);
-                String email = insert.getText().toString();
+                final String email = insert.getText().toString();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);
+                final String extraComics = chosenComics.getText().toString();
 
                 builder.setTitle("Send Request?");
 
                 builder.setMessage("Name: "+name+"\n\nEmail: "+email+"\n\nRequest:\n"+requests);
+                final EditText finalInsert = insert;
+                final String finalRequests = requests;
+                final String finalName = name;
+                final String finalEmail = email;
+                final String finalExtra = extraComics;
                 builder.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            JavaMailUtil.sendMail();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        String myReq="";
+
+                        myReq = myReq.concat("Hi, "+finalName+" would like: \n"+ finalRequests+", "+extraComics+". \n Thank you!");
+//Log.d("problems",myReq);
+                        if(JavaMailUtil.isValid(email)) {
+                            try {
+                                JavaMailUtil.sendMail(myReq, finalEmail);
+                                Toast.makeText(RequestForm.this,"Message Sent Successfully",Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                Toast.makeText(RequestForm.this, "Email Not Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(RequestForm.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
