@@ -48,6 +48,7 @@
                 android:id="@+id/enterName"
                 android:textAlignment="center"/>
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +65,24 @@
                 android:background="@color/colorAccent"
                 android:hint="ENTER EMAIL ADDRESS"
                 android:id="@+id/enterEmail"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't See a Comic You Want? Type It Here Along with Any Special Requests"
+                android:textAlignment="center"
+                android:textSize="15dip"
+                android:layout_margin="20dip"
+                android:id="@+id/comicChoice"
+                android:textColor="@color/colorAccent" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:hint="Comic Request"
+                android:id="@+id/enterComic"
                 android:textAlignment="center"/>
 <!--            <Spinner
                 android:layout_width="match_parent"
