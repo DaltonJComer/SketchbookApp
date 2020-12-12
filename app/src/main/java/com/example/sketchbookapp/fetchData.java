@@ -29,6 +29,9 @@ import java.util.Base64;
 
 import javax.xml.validation.TypeInfoProvider;
 
+/**
+ * this function request for the latest comics for this week using the short box api, this is done asynchronise so that we don't perform network on the main thread
+ */
 public class fetchData extends AsyncTask<Void,Void,Void> {
     String data="",dataParsed="",singleParsed="";
 
@@ -50,6 +53,11 @@ public class fetchData extends AsyncTask<Void,Void,Void> {
         return hexString.toString();
     }
 
+    /**
+     * in this function it uses both private key and public key to get the latest comics from the given api address.
+     * @param voids
+     * @return
+     */
     @Override
     protected Void doInBackground(Void... voids) {
 
@@ -127,6 +135,10 @@ public class fetchData extends AsyncTask<Void,Void,Void> {
         return null;
     }
 
+    /**
+     * this specifies what to do after execution of the program.
+     * @param aVoid
+     */
     @Override
     protected void onPostExecute(Void aVoid){
         super.onPostExecute(aVoid);

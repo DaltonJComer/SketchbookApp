@@ -1,4 +1,7 @@
 package com.example.sketchbookapp;
+/**
+ * @author Dalton Comer| Brendan Park | Joel Liju Jacob
+ */
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+/**
+ * this just presents the contact page with the location to their address
+ */
 public class Contact extends AppCompatActivity {
 
     @Override

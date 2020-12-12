@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * this class present the watchlist that was made by the user from the {@link Releases}, this is present and the option of deleting it.
+ */
 public class Watchlist extends AppCompatActivity {
 
     DBHelper db = new DBHelper(this);

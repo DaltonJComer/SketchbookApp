@@ -11,8 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+/**
+ * this class shows the events by visiting the comic book shop's facebook page and displaying them where you can scroll through if you desire
+ */
 public class Events extends AppCompatActivity {
-
+    /**
+     * this function at the bottom that is where the view is presented
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

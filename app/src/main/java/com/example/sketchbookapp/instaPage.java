@@ -11,8 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link instaPage#newInstance} factory method to
+ * this fragment is used by {@link MainActivity}
  * create an instance of this fragment.
  */
 public class instaPage extends Fragment {

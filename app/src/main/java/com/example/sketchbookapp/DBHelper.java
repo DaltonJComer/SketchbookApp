@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * this class helps with managing the database to add and remove comic books from it
+ */
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "Sketchbook_watchlist";

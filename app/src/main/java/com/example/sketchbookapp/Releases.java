@@ -25,6 +25,10 @@ import java.util.concurrent.ExecutionException;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
+/**
+ * this class handles displaying the information that was got from {@link fetchData}, here the user is offered the options to pick the comics, the user wants to add to their
+ * list.
+ */
 public class Releases extends AppCompatActivity {
     public static ListView data;
     public static String[] listItems;

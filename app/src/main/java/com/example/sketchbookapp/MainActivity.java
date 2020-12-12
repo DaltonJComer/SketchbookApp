@@ -1,4 +1,7 @@
 package com.example.sketchbookapp;
+/**
+ * @author Dalton Comer| Brendan Park| Joel Liju Jacob
+ */
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+/**
+ * this is the main class which presents the user with the instagram page in addition to just the image of the comic book shop.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

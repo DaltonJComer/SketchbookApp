@@ -37,7 +37,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+/**
+ * this class prepares the request form which includes send and add email address, in addition to adding names. This also includes if you want any special offers that you might want to add to the list
+ * this class also uses {@link JavaMailUtil}, and uses it to send the information that you require.
+ */
 public class RequestForm extends AppCompatActivity {
 
     DBHelper db = new DBHelper(this);
