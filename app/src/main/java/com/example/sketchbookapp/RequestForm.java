@@ -51,11 +51,12 @@ public class RequestForm extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_form);
-
+        //Initializes the spinner
         Spinner menu = findViewById(R.id.menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         menu.setAdapter(adapter);
+        //for different activities
         menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -92,16 +93,13 @@ public class RequestForm extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.comicsScroll);
 
-/*        Spinner comics = findViewById(R.id.comicSpinner);
-        ArrayAdapter<String> spinAdapt = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Releases.listItems);
-        comics.setAdapter(spinAdapt);*/
-
         LinearLayout rg = new LinearLayout(this);
         RadioButton rb;
         int id = 0;
 
         Cursor cursor = db.getComics();
         cursor.moveToFirst();
+        //allows the user to look at their watchlisted comics for requests
         while(!cursor.isAfterLast()){
             rb = new RadioButton(this);
             rb.setText(cursor.getString(1)+" ("+cursor.getString(2)+")");
@@ -117,25 +115,10 @@ public class RequestForm extends AppCompatActivity {
             cursor.moveToNext();
         }
 
-/*        for (String s:Releases.listItems) {
-            rb = new RadioButton(this);
-            rb.setText(s);
-            rb.setId(id);
-            rb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    RadioButton currentButton = view.findViewById(view.getId());
-                }
-            });
-            id++;
-            rg.addView(rb);
-        }*/
-
         final int numRadButtons = id;
-
+        //setting look of layout of radio buttons
         rg.setOrientation(RadioGroup.VERTICAL);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) RelativeLayout.LayoutParams.WRAP_CONTENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         params.leftMargin =150;
         params.topMargin = 100;
 
@@ -144,7 +127,7 @@ public class RequestForm extends AppCompatActivity {
         rg.setTag("ComicList");
 
         layout.addView(rg);
-
+        //resetting user's selection
         Button clearRequests = findViewById(R.id.clearRequests);
         clearRequests.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +140,7 @@ public class RequestForm extends AppCompatActivity {
                 }
             }
         });
-
+        //sending the email via Javamail API
         Button sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +160,7 @@ public class RequestForm extends AppCompatActivity {
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(RequestForm.this,R.style.MyAlertDialogStyle);
                 final String extraComics = chosenComics.getText().toString();
-
+                //confirming with user
                 builder.setTitle("Send Request?");
 
                 builder.setMessage("Name: "+name+"\n\nEmail: "+email+"\n\nRequest:\n"+requests);
@@ -186,13 +169,14 @@ public class RequestForm extends AppCompatActivity {
                 final String finalName = name;
                 final String finalEmail = email;
                 final String finalExtra = extraComics;
+                //sends email CCing the input email, comics, name, and special requests
+                //then confirms whether or not email was sent
                 builder.setPositiveButton("Send Request", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String myReq="";
 
                         myReq = myReq.concat("Hi, "+finalName+" would like: \n"+ finalRequests+", "+extraComics+". \n Thank you!");
-//Log.d("problems",myReq);
                         if(JavaMailUtil.isValid(email)) {
                             try {
                                 JavaMailUtil.sendMail(myReq, finalEmail);

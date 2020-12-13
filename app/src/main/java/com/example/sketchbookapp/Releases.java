@@ -40,9 +40,11 @@ public class Releases extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_releases);
 
+        //initializes the view
         data = (ListView) findViewById(R.id.data);
 
         fetchData process = new fetchData();
+        //retrieves data from API call
         try {
             Void result = process.execute().get();
         } catch (ExecutionException e) {
@@ -50,23 +52,16 @@ public class Releases extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        //adding elements into a list
         listItems =process.arrayList;
-
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < listItems.length; ++i) {
             list.add(listItems[i]);
         }
-
+        //array adapter to display releases
         final StableArrayAdapter listAdapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        data.setAdapter(listAdapter);
-
-        /*ArrayAdapter<CharSequence> aa = ArrayAdapter.createFromResource(this, listItems, android.R.layout.simple_list_item_1);
-        data.setAdapter(aa);*/
-
-        //data.setText(listItems);
-        //System.out.println(listItems);
-
+        data.setAdapter(listAdapter); //sets adapter for listview with the releases data
+        //building the spinner menu for switching views
         Spinner menu = findViewById(R.id.menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -105,7 +100,7 @@ public class Releases extends AppCompatActivity {
 
             }
         });
-
+        //onclick for user selecting comic on list. Prompts user to add it to watchlist
         data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -135,7 +130,7 @@ public class Releases extends AppCompatActivity {
             }
         });
     }
-
+    //takes in the input data and creates an adapter to be added to a list
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

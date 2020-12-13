@@ -30,12 +30,13 @@ public class Watchlist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watchlist);
-
+        //spinner for menu
         Spinner menu = findViewById(R.id.menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         menu.setAdapter(adapter);
         menu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            //based on user selection, moves to new activity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(parent.getItemAtPosition(position).toString()!="Change Menu"){
@@ -71,8 +72,11 @@ public class Watchlist extends AppCompatActivity {
         });
 
         final ArrayList<String> list = new ArrayList<String>();
+        //command that pulls currently watchlisted comics
         Cursor cursor = db.getComics();
         cursor.moveToFirst();
+
+        //looking at each item in the watchlist
         while(!cursor.isAfterLast()){
             String name = cursor.getString(1);
             String price = cursor.getString(2);
@@ -80,10 +84,11 @@ public class Watchlist extends AppCompatActivity {
             list.add(details);
             cursor.moveToNext();
         }
+
         final Watchlist.StableArrayAdapter listAdapter = new Watchlist.StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         data = findViewById(R.id.comics);
         data.setAdapter(listAdapter);
-
+        //onclick, double check the user wants to remove and present info. If confirmed, remove from watchlist
         data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -92,9 +97,11 @@ public class Watchlist extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Watchlist.this,R.style.MyAlertDialogStyle);
 
-                builder.setTitle("Remove from watchlist?");
+                builder.setTitle("Remove from watchlist?");//confirming
 
                 builder.setMessage(comicName);
+
+                //onclick, remove comic from watchlist
                 builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -103,6 +110,7 @@ public class Watchlist extends AppCompatActivity {
                         ArrayList<String> updatedList = new ArrayList<String>();
                         Cursor updateCursor = db.getComics();
                         updateCursor.moveToFirst();
+                        //representing the values afterward
                         while(!updateCursor.isAfterLast()){
                             String name = updateCursor.getString(1);
                             String price = updateCursor.getString(2);
@@ -116,6 +124,7 @@ public class Watchlist extends AppCompatActivity {
                         data.invalidateViews();
                     }
                 });
+                //user does not want to remove comicbook from watchlist
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -125,12 +134,13 @@ public class Watchlist extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
             }
         });
 
     }
 
-    private class StableArrayAdapter extends ArrayAdapter<String> {
+    private class StableArrayAdapter extends ArrayAdapter<String> { //custom list adapter for displaying comics on watchlist
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 

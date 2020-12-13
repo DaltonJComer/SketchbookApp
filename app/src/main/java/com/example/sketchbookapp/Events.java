@@ -23,7 +23,7 @@ public class Events extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
-
+        //sets up spinner for switching between activities
         Spinner menu = findViewById(R.id.menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -62,7 +62,7 @@ public class Events extends AppCompatActivity {
 
             }
         });
-
+        //presenting facebook view
         WebView faceView =(WebView)findViewById(R.id.facebookPage);
 
         faceView.setWebViewClient(new WebViewClient());

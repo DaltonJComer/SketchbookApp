@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //sets up spinner selection for different activities
         Spinner menu = findViewById(R.id.menu);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.menu_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-
+            //presents company's Instagram
             Uri uri = Uri.parse("http://instagram.com/sketchbookcomicsandgames/");
 
 
